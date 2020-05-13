@@ -44,44 +44,39 @@ public:
     return m_size;
   }
 
-  const char* data() const
+   char* data() const
   {
     return m_data;
   }
 
-  TString operator+(const TString& other)
-  {
-    TString newStr;
+   TString operator+(const TString& other)
+   {
+     TString newStr;
 
-    int thisLength = strlen(this->m_data);
-    int otherLength = strlen(other.m_data);
+     int thisLength = strlen(this->m_data);
+     int otherLength = strlen(other.m_data);
 
-    newStr.m_size = thisLength + otherLength;
+     newStr.m_size = thisLength + otherLength;
 
-    newStr.m_data = new char[thisLength + otherLength + 1];
+     newStr.m_data = new char[thisLength + otherLength + 1];
 
-    int i = 0;
-    for (; i < thisLength; i++)
-    {
-      newStr.m_data[i] = this->m_data[i];
-    }
+     int i = 0;
+     for (; i < thisLength; i++)
+     {
+       newStr.m_data[i] = this->m_data[i];
+     }
 
-    for (int j = 0; j < otherLength; j++, i++)
-    {
-      newStr.m_data[i] = other.m_data[j];
-    }
+     for (int j = 0; j < otherLength; j++, i++)
+     {
+       newStr.m_data[i] = other.m_data[j];
+     }
 
-    newStr.m_data[thisLength + otherLength] = '\0';
+     newStr.m_data[thisLength + otherLength] = '\0';
 
-    return newStr;
-  }
+     return newStr;
+   }
 
-  char& operator[](size_t i)
-  {
-    return m_data[i];
-  }
-
-  const char& operator[](size_t i) const
+   char& operator[](size_t i) const
   {
     if (i < 0 || i >= m_size)
       throw "nil'zya(";
@@ -155,7 +150,6 @@ public:
       return NULL;
   }
 
-  //MultiFaCs Productions (c) all rights are reserved
   TString* Tstrtok(const char* c) {
     int count = 0;
 
@@ -184,6 +178,9 @@ public:
 
     return result;
   }
+
+  friend std::ostream& operator<<(std::ostream& stream, const TString& self);
+  friend std::istream& operator>>(std::istream& stream, TString& self);
 
 private:
   size_t m_size;
